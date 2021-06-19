@@ -33,3 +33,19 @@ app.get('/user/:id', (req,res) => {
       id: parseInt(req.params.id)
   })
 })
+
+app.delete('/user/:id', (req,res) => {
+  userId = parseInt(req.params.id)
+  if (userId >= 0 && userId < users.length){
+    console.log("deleting user " + userId)
+    res.status(202)
+    res.send({
+      id: userId
+    })
+    users.splice(userId, 1)
+  } else {
+    console.log("could not find user " + userId)
+    res.status(204)
+    res.send()
+  }
+})
